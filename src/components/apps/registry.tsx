@@ -1,8 +1,10 @@
 import type { ComponentType } from "react";
 import {
   AboutIcon,
+  CommandPromptIcon,
   ComputerIcon,
   ContactIcon,
+  DisplayIcon,
   MinesweeperIcon,
   NotepadIcon,
   PaintIcon,
@@ -12,7 +14,9 @@ import {
   SolitaireIcon,
 } from "@/components/icons";
 import { AboutMeApp } from "./AboutMe";
+import { CommandPromptApp } from "./CommandPrompt";
 import { ContactApp } from "./Contact";
+import { DisplayPropertiesApp } from "./DisplayProperties";
 import { MinesweeperApp } from "./Minesweeper";
 import { MyComputerApp } from "./MyComputer";
 import { NotepadApp } from "./Notepad";
@@ -32,7 +36,9 @@ export type AppId =
   | "notepad"
   | "paint"
   | "my-computer"
-  | "recycle-bin";
+  | "recycle-bin"
+  | "command-prompt"
+  | "display-properties";
 
 export type AppDef = {
   id: AppId;
@@ -161,6 +167,29 @@ export const APPS: Record<AppId, AppDef> = {
     minWidth: 280,
     minHeight: 280,
   },
+  "command-prompt": {
+    id: "command-prompt",
+    title: "Command Prompt",
+    subtitle: "A real fake shell",
+    icon: CommandPromptIcon,
+    content: CommandPromptApp,
+    width: 480,
+    height: 340,
+    minWidth: 320,
+    minHeight: 220,
+    resizable: true,
+  },
+  "display-properties": {
+    id: "display-properties",
+    title: "Display Properties",
+    subtitle: "Appearance",
+    icon: DisplayIcon,
+    content: DisplayPropertiesApp,
+    width: 420,
+    height: 320,
+    minWidth: 360,
+    minHeight: 280,
+  },
 };
 
 export const DESKTOP_ORDER: AppId[] = [
@@ -172,6 +201,7 @@ export const DESKTOP_ORDER: AppId[] = [
   "minesweeper",
   "solitaire",
   "paint",
+  "command-prompt",
   "recycle-bin",
 ];
 export const START_MENU_ORDER: AppId[] = [
@@ -184,4 +214,5 @@ export const START_MENU_ORDER: AppId[] = [
   "solitaire",
   "notepad",
   "paint",
+  "command-prompt",
 ];

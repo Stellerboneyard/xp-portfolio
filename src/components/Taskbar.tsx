@@ -79,9 +79,8 @@ export function Taskbar({ onLogOff, onShutDown }: { onLogOff: () => void; onShut
           }}
           className="flex items-center gap-1.5 rounded-md px-2 py-1 text-[13px] font-bold text-white italic shadow-inner"
           style={{
-            background: menuOpen
-              ? "linear-gradient(180deg, #1a6b24, #2f8f3a)"
-              : "linear-gradient(180deg, #6fd67f, #2f8f3a)",
+            background: "linear-gradient(180deg, var(--xp-taskbar-start), var(--xp-taskbar-end))",
+            filter: menuOpen ? "brightness(0.8)" : undefined,
           }}
         >
           <StartOrb size={22} />

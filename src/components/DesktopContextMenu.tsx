@@ -53,7 +53,7 @@ export function DesktopContextMenu({
       <div className="my-1 border-t border-neutral-300" />
       {item("New Text Document", () => openApp("notepad"))}
       <div className="my-1 border-t border-neutral-300" />
-      {item("Properties", () => openApp("my-computer"))}
+      {item("Properties", () => openApp("display-properties"))}
     </div>
   );
 }

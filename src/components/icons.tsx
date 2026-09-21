@@ -212,6 +212,33 @@ export function MailGlyph({ size = 16, className }: IconProps) {
   );
 }
 
+export function CommandPromptIcon({ size = 40, className }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 40 40" className={className}>
+      <rect x="4" y="6" width="32" height="28" rx="2" fill="#1a1a1a" stroke="#7a7a7a" strokeWidth="1" />
+      <path d="M9 14l6 5-6 5" stroke="#e5e5e5" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <line x1="17" y1="24" x2="27" y2="24" stroke="#e5e5e5" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function DisplayIcon({ size = 40, className }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 40 40" className={className}>
+      <defs>
+        <linearGradient id="disp-g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#f6a6c1" />
+          <stop offset="50%" stopColor="#8fd6e8" />
+          <stop offset="100%" stopColor="#c9e88f" />
+        </linearGradient>
+      </defs>
+      <rect x="5" y="7" width="30" height="19" rx="1.5" fill="url(#disp-g)" stroke="#5c7291" strokeWidth="1.2" />
+      <rect x="14" y="27" width="12" height="3" fill="#b7c9de" stroke="#5c7291" strokeWidth="1" />
+      <rect x="10" y="30" width="20" height="2.5" rx="1" fill="#8fa4bc" />
+    </svg>
+  );
+}
+
 export function StartOrb({ size = 22, className }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" className={className}>

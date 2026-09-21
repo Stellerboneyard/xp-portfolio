@@ -96,7 +96,7 @@ export function StartMenu({
 
       <div
         className="flex items-center justify-end gap-2 px-2 py-1.5"
-        style={{ background: "linear-gradient(180deg, #1e5fd6, #1349a8)" }}
+        style={{ background: "linear-gradient(180deg, var(--xp-titlebar-start), var(--xp-titlebar-end))" }}
       >
         <button
           onClick={() => {

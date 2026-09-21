@@ -1,16 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useWindowManager } from "@/lib/windowManager";
 import { APPS, DESKTOP_ORDER } from "@/components/apps/registry";
 import { Window } from "@/components/Window";
 import { Taskbar } from "@/components/Taskbar";
 import { DesktopContextMenu } from "@/components/DesktopContextMenu";
 import { Wallpaper } from "@/components/Wallpaper";
+import { applyTheme, loadSavedTheme } from "@/lib/theme";
 
 export function Desktop({ onLogOff, onShutDown }: { onLogOff: () => void; onShutDown: () => void }) {
   const { windows, openApp } = useWindowManager();
   const [menu, setMenu] = useState<{ x: number; y: number } | null>(null);
+
+  useEffect(() => {
+    applyTheme(loadSavedTheme());
+  }, []);
 
   return (
     <div
