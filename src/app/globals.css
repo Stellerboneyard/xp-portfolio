@@ -96,3 +96,27 @@ body {
 .xp-cursor-blink {
   animation: xp-blink 1s step-start infinite;
 }
+
+/* A slow, irregular-feeling blink for the avatar -- two eye shapes squash to
+   near-zero height then back, most of the cycle spent open. */
+@keyframes xp-eye-blink {
+  0%,
+  91%,
+  100% {
+    transform: scaleY(1);
+  }
+  94% {
+    transform: scaleY(0.08);
+  }
+  97% {
+    transform: scaleY(1);
+  }
+}
+.xp-avatar-eye {
+  animation: xp-eye-blink 5s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.xp-avatar-eye.xp-avatar-eye-delay {
+  animation-delay: 0.05s;
+}

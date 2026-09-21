@@ -6,6 +6,7 @@ import { APPS, DESKTOP_ORDER } from "@/components/apps/registry";
 import { Window } from "@/components/Window";
 import { Taskbar } from "@/components/Taskbar";
 import { DesktopContextMenu } from "@/components/DesktopContextMenu";
+import { Wallpaper } from "@/components/Wallpaper";
 
 export function Desktop({ onLogOff, onShutDown }: { onLogOff: () => void; onShutDown: () => void }) {
   const { windows, openApp } = useWindowManager();
@@ -13,13 +14,14 @@ export function Desktop({ onLogOff, onShutDown }: { onLogOff: () => void; onShut
 
   return (
     <div
-      className="xp-wallpaper absolute inset-0 overflow-hidden"
+      className="absolute inset-0 overflow-hidden"
       onContextMenu={(e) => {
         e.preventDefault();
         setMenu({ x: e.clientX, y: e.clientY });
       }}
     >
-      <div className="grid grid-flow-col grid-rows-[repeat(5,84px)] gap-1 p-3 sm:grid-rows-[repeat(6,88px)]">
+      <Wallpaper />
+      <div className="relative grid grid-flow-col grid-rows-[repeat(5,84px)] gap-1 p-3 sm:grid-rows-[repeat(6,88px)]">
         {DESKTOP_ORDER.map((id) => {
           const app = APPS[id];
           return (

@@ -37,6 +37,7 @@ export type AppId =
 export type AppDef = {
   id: AppId;
   title: string;
+  subtitle: string;
   icon: ComponentType<{ size?: number; className?: string }>;
   content: ComponentType;
   width: number;
@@ -47,13 +48,54 @@ export type AppDef = {
 };
 
 export const APPS: Record<AppId, AppDef> = {
-  about: { id: "about", title: "About Me", icon: AboutIcon, content: AboutMeApp, width: 460, height: 400, minWidth: 320, minHeight: 280 },
-  resume: { id: "resume", title: "My Resume", icon: ResumeIcon, content: ResumeApp, width: 520, height: 520, minWidth: 360, minHeight: 360 },
-  projects: { id: "projects", title: "My Projects", icon: ProjectsIcon, content: ProjectsApp, width: 560, height: 420, minWidth: 340, minHeight: 300 },
-  contact: { id: "contact", title: "Contact Me", icon: ContactIcon, content: ContactApp, width: 420, height: 380, minWidth: 320, minHeight: 300 },
+  about: {
+    id: "about",
+    title: "About Me",
+    subtitle: "Who's behind this",
+    icon: AboutIcon,
+    content: AboutMeApp,
+    width: 460,
+    height: 400,
+    minWidth: 320,
+    minHeight: 280,
+  },
+  resume: {
+    id: "resume",
+    title: "My Resume",
+    subtitle: "Education & skills",
+    icon: ResumeIcon,
+    content: ResumeApp,
+    width: 520,
+    height: 520,
+    minWidth: 360,
+    minHeight: 360,
+  },
+  projects: {
+    id: "projects",
+    title: "My Projects",
+    subtitle: "View my work",
+    icon: ProjectsIcon,
+    content: ProjectsApp,
+    width: 560,
+    height: 480,
+    minWidth: 340,
+    minHeight: 360,
+  },
+  contact: {
+    id: "contact",
+    title: "Contact Me",
+    subtitle: "Send me a message",
+    icon: ContactIcon,
+    content: ContactApp,
+    width: 420,
+    height: 380,
+    minWidth: 320,
+    minHeight: 300,
+  },
   minesweeper: {
     id: "minesweeper",
     title: "Minesweeper",
+    subtitle: "Classic, 9x9",
     icon: MinesweeperIcon,
     content: MinesweeperApp,
     width: 260,
@@ -64,6 +106,7 @@ export const APPS: Record<AppId, AppDef> = {
   solitaire: {
     id: "solitaire",
     title: "Solitaire",
+    subtitle: "Klondike, real rules",
     icon: SolitaireIcon,
     content: SolitaireApp,
     width: 460,
@@ -75,6 +118,7 @@ export const APPS: Record<AppId, AppDef> = {
   notepad: {
     id: "notepad",
     title: "Notepad",
+    subtitle: "Plain text",
     icon: NotepadIcon,
     content: NotepadApp,
     width: 440,
@@ -86,6 +130,7 @@ export const APPS: Record<AppId, AppDef> = {
   paint: {
     id: "paint",
     title: "Paint",
+    subtitle: "Draw something",
     icon: PaintIcon,
     content: PaintApp,
     width: 480,
@@ -97,22 +142,24 @@ export const APPS: Record<AppId, AppDef> = {
   "my-computer": {
     id: "my-computer",
     title: "My Computer",
+    subtitle: "System info",
     icon: ComputerIcon,
     content: MyComputerApp,
     width: 420,
-    height: 380,
+    height: 440,
     minWidth: 320,
-    minHeight: 300,
+    minHeight: 340,
   },
   "recycle-bin": {
     id: "recycle-bin",
     title: "Recycle Bin",
+    subtitle: "Nothing hidden here",
     icon: RecycleBinIcon,
     content: RecycleBinApp,
     width: 360,
-    height: 280,
+    height: 340,
     minWidth: 280,
-    minHeight: 220,
+    minHeight: 280,
   },
 };
 

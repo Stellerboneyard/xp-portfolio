@@ -1,14 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { UserIcon } from "@/components/icons";
+import { AnimatedAvatar } from "@/components/AnimatedAvatar";
 import { profile } from "@/lib/content";
+import { sound } from "@/lib/sound";
 
 export function LoginScreen({ onLogin }: { onLogin: () => void }) {
   const [loggingIn, setLoggingIn] = useState(false);
 
   const handleClick = () => {
     if (loggingIn) return;
+    sound.chime();
     setLoggingIn(true);
     window.setTimeout(onLogin, 900);
   };
@@ -29,7 +31,7 @@ export function LoginScreen({ onLogin }: { onLogin: () => void }) {
           className="flex flex-col items-center gap-3 rounded-lg p-3 transition hover:bg-white/10"
         >
           <div className="rounded-md border-2 border-white/70 p-1 shadow-xl">
-            <UserIcon size={64} />
+            <AnimatedAvatar size={64} />
           </div>
           <span className="text-lg text-white">{profile.name}</span>
         </button>

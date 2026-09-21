@@ -3,6 +3,7 @@
 import { createContext, useCallback, useContext, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import { APPS, type AppId } from "@/components/apps/registry";
+import { sound } from "@/lib/sound";
 
 type WindowState = {
   appId: AppId;
@@ -24,6 +25,7 @@ type WindowManagerApi = {
   closeApp: (id: AppId) => void;
   focusApp: (id: AppId) => void;
   minimizeApp: (id: AppId) => void;
+  restoreApp: (id: AppId) => void;
   toggleMaximizeApp: (id: AppId) => void;
   moveApp: (id: AppId, x: number, y: number) => void;
   resizeApp: (id: AppId, width: number, height: number) => void;
@@ -55,6 +57,7 @@ export function WindowManagerProvider({ children }: { children: ReactNode }) {
         focusApp(id);
         return;
       }
+      sound.open();
       zCounter += 1;
       cascadeOffset = (cascadeOffset + 1) % 6;
       const def = APPS[id];
@@ -76,14 +79,24 @@ export function WindowManagerProvider({ children }: { children: ReactNode }) {
   );
 
   const closeApp = useCallback((id: AppId) => {
+    sound.close();
     setWindows((ws) => ws.filter((w) => w.appId !== id));
   }, []);
 
   const minimizeApp = useCallback((id: AppId) => {
+    sound.click();
     setWindows((ws) => ws.map((w) => (w.appId === id ? { ...w, minimized: true } : w)));
   }, []);
 
+  // Restores without stealing focus/z-order the way focusApp would -- used
+  // by "Show Desktop" to bring back several windows in their original stack
+  // order rather than piling them all on top in click order.
+  const restoreApp = useCallback((id: AppId) => {
+    setWindows((ws) => ws.map((w) => (w.appId === id ? { ...w, minimized: false } : w)));
+  }, []);
+
   const toggleMaximizeApp = useCallback((id: AppId) => {
+    sound.click();
     setWindows((ws) => ws.map((w) => (w.appId === id ? { ...w, maximized: !w.maximized } : w)));
   }, []);
 
@@ -108,13 +121,26 @@ export function WindowManagerProvider({ children }: { children: ReactNode }) {
       closeApp,
       focusApp,
       minimizeApp,
+      restoreApp,
       toggleMaximizeApp,
       moveApp,
       resizeApp,
       isOpen,
       activeAppId,
     }),
-    [windows, openApp, closeApp, focusApp, minimizeApp, toggleMaximizeApp, moveApp, resizeApp, isOpen, activeAppId],
+    [
+      windows,
+      openApp,
+      closeApp,
+      focusApp,
+      minimizeApp,
+      restoreApp,
+      toggleMaximizeApp,
+      moveApp,
+      resizeApp,
+      isOpen,
+      activeAppId,
+    ],
   );
 
   return <WindowManagerContext.Provider value={value}>{children}</WindowManagerContext.Provider>;

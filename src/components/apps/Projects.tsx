@@ -1,9 +1,16 @@
 import { projects } from "@/lib/content";
+import { ExplorerChrome } from "@/components/ExplorerChrome";
+import { ProjectsIcon } from "@/components/icons";
 
 export function ProjectsApp() {
   return (
-    <div className="h-full overflow-y-auto bg-[#ece9d8] p-3">
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+    <ExplorerChrome
+      appId="projects"
+      addressIcon={<ProjectsIcon size={14} />}
+      addressLabel="My Documents\\My Projects"
+      statusText={`${projects.length} objects`}
+    >
+      <div className="grid grid-cols-1 gap-3 p-3 sm:grid-cols-2">
         {projects.map((p) => (
           <a
             key={p.title}
@@ -26,6 +33,6 @@ export function ProjectsApp() {
           </a>
         ))}
       </div>
-    </div>
+    </ExplorerChrome>
   );
 }

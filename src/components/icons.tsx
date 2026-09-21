@@ -183,6 +183,35 @@ export function ComputerIcon({ size = 40, className }: IconProps) {
   );
 }
 
+export function GitHubGlyph({ size = 16, className }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 16 16" className={className} fill="currentColor">
+      <path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.49c-2.22.48-2.69-1.07-2.69-1.07-.36-.93-.89-1.17-.89-1.17-.72-.5.06-.49.06-.49.8.06 1.22.83 1.22.83.71 1.21 1.87.86 2.33.66.07-.52.28-.86.5-1.06-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 8 0Z" />
+    </svg>
+  );
+}
+
+export function LinkedInGlyph({ size = 16, className }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 16 16" className={className}>
+      <rect width="16" height="16" rx="2.5" fill="#0a66c2" />
+      <path
+        d="M3.6 6.4h1.8V12H3.6zM4.5 3.6a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1ZM7 6.4h1.7v.77h.02c.24-.44.83-.9 1.7-.9 1.82 0 2.16 1.14 2.16 2.62V12h-1.8V9.26c0-.65-.01-1.5-.92-1.5-.93 0-1.07.7-1.07 1.44V12H7z"
+        fill="#fff"
+      />
+    </svg>
+  );
+}
+
+export function MailGlyph({ size = 16, className }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 16 16" className={className}>
+      <rect x="1" y="3.5" width="14" height="9" rx="1.5" fill="#3f9a54" />
+      <path d="M2 4.5l6 4.5 6-4.5" fill="none" stroke="#fff" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 export function StartOrb({ size = 22, className }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" className={className}>

@@ -11,7 +11,16 @@ export const profile = {
   graduating: "2029",
   email: "aryanqbz@gmail.com",
   github: "https://github.com/Stellerboneyard",
+  linkedin: "https://www.linkedin.com/in/aryan-raj-314a55380",
 };
+
+export type SocialLink = { label: string; href: string };
+
+export const socials: SocialLink[] = [
+  { label: "GitHub", href: profile.github },
+  { label: "LinkedIn", href: profile.linkedin },
+  { label: "Email", href: `mailto:${profile.email}` },
+];
 
 export const bio = [
   "I'm a second-year CS student learning by actually shipping things, not just \
