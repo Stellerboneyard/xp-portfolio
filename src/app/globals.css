@@ -1,26 +1,98 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --xp-taskbar-start: #2f8f3a;
+  --xp-taskbar-end: #1a5b22;
+  --xp-titlebar-start: #1e5fd6;
+  --xp-titlebar-mid: #3f8cf3;
+  --xp-titlebar-end: #1349a8;
+  --xp-face: #ece9d8;
+  --xp-border-dark: #7a7a7a;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #08122a;
+  color: #111;
+  font-family: Tahoma, Verdana, "Segoe UI", Arial, sans-serif;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Raised "Windows Classic" panel -- used for cards, project tiles, etc. */
+.xp-panel {
+  background: var(--xp-face);
+  border-top: 1px solid #fff;
+  border-left: 1px solid #fff;
+  border-right: 1px solid #8a8a8a;
+  border-bottom: 1px solid #8a8a8a;
+  border-radius: 2px;
+}
+
+/* Sunken "Windows Classic" panel -- used for read-only text blocks. */
+.xp-inset {
+  background: #fff;
+  border-top: 1px solid #8a8a8a;
+  border-left: 1px solid #8a8a8a;
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  border-radius: 2px;
+}
+
+.xp-well {
+  background: #bdbdbd;
+  border-top: 2px solid #7a7a7a;
+  border-left: 2px solid #7a7a7a;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+}
+
+.xp-button {
+  background: var(--xp-face);
+  border-top: 1px solid #fff;
+  border-left: 1px solid #fff;
+  border-right: 1px solid #6b6b6b;
+  border-bottom: 1px solid #6b6b6b;
+}
+.xp-button:active {
+  border-top: 1px solid #6b6b6b;
+  border-left: 1px solid #6b6b6b;
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+}
+
+.xp-cell-out {
+  background: #c0c0c0;
+  border-top: 2px solid #fff;
+  border-left: 2px solid #fff;
+  border-right: 2px solid #7a7a7a;
+  border-bottom: 2px solid #7a7a7a;
+}
+.xp-cell-out:active {
+  border: 1px solid #7a7a7a;
+}
+.xp-cell-in {
+  background: #d4d0c8;
+  border: 1px solid #a8a49a;
+}
+
+/* Desktop wallpaper: an original gradient hill/sky scene, not a copy of any
+   real OS wallpaper -- just an homage to the "green hill, blue sky" mood. */
+.xp-wallpaper {
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 100%, rgba(255, 255, 255, 0.06), transparent 70%),
+    linear-gradient(180deg, #4f8cff 0%, #8dc3ff 38%, #cfe9ff 60%, #7fbf5b 61%, #4f9c3d 100%);
+}
+
+@keyframes xp-blink {
+  50% {
+    opacity: 0;
+  }
+}
+.xp-cursor-blink {
+  animation: xp-blink 1s step-start infinite;
 }
