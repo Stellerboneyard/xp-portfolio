@@ -12,6 +12,10 @@ type WindowState = {
   x: number;
   y: number;
   z: number;
+  // current size, starts at the app's default and only changes if the app
+  // is resizable -- ignored while maximized
+  width: number;
+  height: number;
 };
 
 type WindowManagerApi = {
@@ -22,6 +26,7 @@ type WindowManagerApi = {
   minimizeApp: (id: AppId) => void;
   toggleMaximizeApp: (id: AppId) => void;
   moveApp: (id: AppId, x: number, y: number) => void;
+  resizeApp: (id: AppId, width: number, height: number) => void;
   isOpen: (id: AppId) => boolean;
   activeAppId: AppId | null;
 };
@@ -52,6 +57,7 @@ export function WindowManagerProvider({ children }: { children: ReactNode }) {
       }
       zCounter += 1;
       cascadeOffset = (cascadeOffset + 1) % 6;
+      const def = APPS[id];
       setWindows((ws) => [
         ...ws,
         {
@@ -61,6 +67,8 @@ export function WindowManagerProvider({ children }: { children: ReactNode }) {
           x: 80 + cascadeOffset * 28,
           y: 60 + cascadeOffset * 24,
           z: zCounter,
+          width: def.width,
+          height: def.height,
         },
       ]);
     },
@@ -83,6 +91,10 @@ export function WindowManagerProvider({ children }: { children: ReactNode }) {
     setWindows((ws) => ws.map((w) => (w.appId === id ? { ...w, x, y } : w)));
   }, []);
 
+  const resizeApp = useCallback((id: AppId, width: number, height: number) => {
+    setWindows((ws) => ws.map((w) => (w.appId === id ? { ...w, width, height } : w)));
+  }, []);
+
   const activeAppId = useMemo(() => {
     const visible = windows.filter((w) => !w.minimized);
     if (visible.length === 0) return null;
@@ -98,10 +110,11 @@ export function WindowManagerProvider({ children }: { children: ReactNode }) {
       minimizeApp,
       toggleMaximizeApp,
       moveApp,
+      resizeApp,
       isOpen,
       activeAppId,
     }),
-    [windows, openApp, closeApp, focusApp, minimizeApp, toggleMaximizeApp, moveApp, isOpen, activeAppId],
+    [windows, openApp, closeApp, focusApp, minimizeApp, toggleMaximizeApp, moveApp, resizeApp, isOpen, activeAppId],
   );
 
   return <WindowManagerContext.Provider value={value}>{children}</WindowManagerContext.Provider>;

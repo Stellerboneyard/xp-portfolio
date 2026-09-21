@@ -1,15 +1,24 @@
 "use client";
 
+import { useState } from "react";
 import { useWindowManager } from "@/lib/windowManager";
 import { APPS, DESKTOP_ORDER } from "@/components/apps/registry";
 import { Window } from "@/components/Window";
 import { Taskbar } from "@/components/Taskbar";
+import { DesktopContextMenu } from "@/components/DesktopContextMenu";
 
 export function Desktop({ onLogOff, onShutDown }: { onLogOff: () => void; onShutDown: () => void }) {
   const { windows, openApp } = useWindowManager();
+  const [menu, setMenu] = useState<{ x: number; y: number } | null>(null);
 
   return (
-    <div className="xp-wallpaper absolute inset-0 overflow-hidden">
+    <div
+      className="xp-wallpaper absolute inset-0 overflow-hidden"
+      onContextMenu={(e) => {
+        e.preventDefault();
+        setMenu({ x: e.clientX, y: e.clientY });
+      }}
+    >
       <div className="grid grid-flow-col grid-rows-[repeat(5,84px)] gap-1 p-3 sm:grid-rows-[repeat(6,88px)]">
         {DESKTOP_ORDER.map((id) => {
           const app = APPS[id];
@@ -34,6 +43,8 @@ export function Desktop({ onLogOff, onShutDown }: { onLogOff: () => void; onShut
       {windows.map((w) => (
         <Window key={w.appId} win={w} />
       ))}
+
+      {menu && <DesktopContextMenu x={menu.x} y={menu.y} onClose={() => setMenu(null)} />}
 
       <Taskbar onLogOff={onLogOff} onShutDown={onShutDown} />
     </div>

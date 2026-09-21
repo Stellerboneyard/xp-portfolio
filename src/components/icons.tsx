@@ -124,6 +124,65 @@ export function RecycleBinIcon({ size = 40, className }: IconProps) {
   );
 }
 
+export function NotepadIcon({ size = 40, className }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 40 40" className={className}>
+      <rect x="7" y="4" width="26" height="32" rx="1.5" fill="#fffef2" stroke="#9a9a7a" strokeWidth="1.2" />
+      <rect x="7" y="4" width="6" height="32" fill="#f2c94c" opacity="0.7" />
+      <line x1="17" y1="12" x2="29" y2="12" stroke="#8896b3" strokeWidth="1.2" />
+      <line x1="17" y1="17" x2="29" y2="17" stroke="#8896b3" strokeWidth="1.2" />
+      <line x1="17" y1="22" x2="29" y2="22" stroke="#8896b3" strokeWidth="1.2" />
+      <line x1="17" y1="27" x2="25" y2="27" stroke="#8896b3" strokeWidth="1.2" />
+    </svg>
+  );
+}
+
+export function PaintIcon({ size = 40, className }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 40 40" className={className}>
+      <path
+        d="M20 5c8 0 14 6 14 13 0 5-3 8-7 8h-3a2 2 0 0 0-1.6 3.2l.6.8A2 2 0 0 1 21 33c-9 0-15-7-15-15C6 11 12 5 20 5z"
+        fill="#f4f4f4"
+        stroke="#8a8a8a"
+        strokeWidth="1.2"
+      />
+      <circle cx="13" cy="17" r="2.2" fill="#ed1c24" />
+      <circle cx="16" cy="12" r="2.2" fill="#22b14c" />
+      <circle cx="23" cy="11" r="2.2" fill="#00a2e8" />
+      <circle cx="28" cy="15" r="2.2" fill="#fff200" />
+      <circle cx="14" cy="23" r="2.2" fill="#a349a4" />
+    </svg>
+  );
+}
+
+export function SolitaireIcon({ size = 40, className }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 40 40" className={className}>
+      <rect x="4" y="9" width="20" height="27" rx="2" fill="#fff" stroke="#7a7a7a" strokeWidth="1" transform="rotate(-8 14 22)" />
+      <rect x="15" y="6" width="20" height="27" rx="2" fill="#fff" stroke="#7a7a7a" strokeWidth="1" />
+      <text x="18" y="17" fontSize="9" fontWeight="700" fill="#e0121e">A</text>
+      <text x="18" y="27" fontSize="10" fill="#e0121e">{"♥"}</text>
+    </svg>
+  );
+}
+
+export function ComputerIcon({ size = 40, className }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 40 40" className={className}>
+      <defs>
+        <linearGradient id="pc-g" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#e5eef8" />
+          <stop offset="100%" stopColor="#b7c9de" />
+        </linearGradient>
+      </defs>
+      <rect x="5" y="7" width="30" height="19" rx="1.5" fill="url(#pc-g)" stroke="#5c7291" strokeWidth="1.2" />
+      <rect x="8" y="10" width="24" height="13" fill="#1a3d73" />
+      <rect x="14" y="27" width="12" height="3" fill="#b7c9de" stroke="#5c7291" strokeWidth="1" />
+      <rect x="10" y="30" width="20" height="2.5" rx="1" fill="#8fa4bc" />
+    </svg>
+  );
+}
+
 export function StartOrb({ size = 22, className }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" className={className}>

@@ -22,11 +22,13 @@ function useIsMobile() {
 
 export function Window({ win }: { win: WindowState }) {
   const def = APPS[win.appId];
-  const { closeApp, focusApp, minimizeApp, toggleMaximizeApp, moveApp, activeAppId } = useWindowManager();
+  const { closeApp, focusApp, minimizeApp, toggleMaximizeApp, moveApp, resizeApp, activeAppId } = useWindowManager();
   const isMobile = useIsMobile();
   const isActive = activeAppId === win.appId;
   const dragRef = useRef<{ startX: number; startY: number; originX: number; originY: number } | null>(null);
   const [dragging, setDragging] = useState(false);
+  const resizeRef = useRef<{ startX: number; startY: number; originW: number; originH: number } | null>(null);
+  const [resizing, setResizing] = useState(false);
 
   if (win.minimized) return null;
 
@@ -57,6 +59,28 @@ export function Window({ win }: { win: WindowState }) {
     dragRef.current = null;
   };
 
+  const onResizePointerDown = (e: React.PointerEvent) => {
+    e.stopPropagation();
+    focusApp(win.appId);
+    resizeRef.current = { startX: e.clientX, startY: e.clientY, originW: win.width, originH: win.height };
+    setResizing(true);
+    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+  };
+
+  const onResizePointerMove = (e: React.PointerEvent) => {
+    if (!resizing || !resizeRef.current) return;
+    const dx = e.clientX - resizeRef.current.startX;
+    const dy = e.clientY - resizeRef.current.startY;
+    const nextW = Math.max(def.minWidth, resizeRef.current.originW + dx);
+    const nextH = Math.max(def.minHeight, resizeRef.current.originH + dy);
+    resizeApp(win.appId, nextW, nextH);
+  };
+
+  const endResize = () => {
+    setResizing(false);
+    resizeRef.current = null;
+  };
+
   const Content = def.content;
 
   return (
@@ -68,7 +92,7 @@ export function Window({ win }: { win: WindowState }) {
       style={
         fullScreen
           ? { zIndex: win.z }
-          : { left: win.x, top: win.y, width: def.width, height: def.height, zIndex: win.z }
+          : { left: win.x, top: win.y, width: win.width, height: win.height, zIndex: win.z }
       }
     >
       <div
@@ -124,6 +148,20 @@ export function Window({ win }: { win: WindowState }) {
       <div className="min-h-0 flex-1 bg-[#ece9d8]">
         <Content />
       </div>
+      {def.resizable && !fullScreen && (
+        <div
+          onPointerDown={onResizePointerDown}
+          onPointerMove={onResizePointerMove}
+          onPointerUp={endResize}
+          onPointerCancel={endResize}
+          className="absolute right-0 bottom-0 h-4 w-4 cursor-nwse-resize"
+          style={{ touchAction: "none" }}
+        >
+          <svg viewBox="0 0 16 16" className="h-full w-full opacity-60">
+            <path d="M14 14 L14 9 M14 14 L9 14 M14 6 L6 14" stroke="#5f7691" strokeWidth="1.5" />
+          </svg>
+        </div>
+      )}
     </div>
   );
 }

@@ -39,7 +39,7 @@ export function StartMenu({
         <span className="text-sm font-bold">{profile.name}</span>
       </div>
 
-      <div className="flex bg-white">
+      <div className="flex max-h-[60vh] overflow-y-auto bg-white">
         <div className="flex w-full flex-col gap-0.5 p-1.5">
           {START_MENU_ORDER.map((id) => {
             const app = APPS[id];

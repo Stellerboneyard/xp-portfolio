@@ -1,15 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import { BootScreen } from "@/components/BootScreen";
 import { LoginScreen } from "@/components/LoginScreen";
 import { Desktop } from "@/components/Desktop";
 import { ShutdownScreen } from "@/components/ShutdownScreen";
 import { WindowManagerProvider } from "@/lib/windowManager";
 
-type Screen = "login" | "desktop" | "shutdown";
+type Screen = "boot" | "login" | "desktop" | "shutdown";
 
 export default function Home() {
-  const [screen, setScreen] = useState<Screen>("login");
+  const [screen, setScreen] = useState<Screen>("boot");
   // Bumped every time we return to the login screen so the desktop's window
   // state (open/minimized/positions) resets on the next session, same as a
   // real log off.
@@ -17,6 +18,7 @@ export default function Home() {
 
   return (
     <div className="fixed inset-0 h-[100dvh] w-full overflow-hidden text-[13px]">
+      {screen === "boot" && <BootScreen onDone={() => setScreen("login")} />}
       {screen === "login" && (
         <LoginScreen
           onLogin={() => {
@@ -30,7 +32,7 @@ export default function Home() {
           <Desktop onLogOff={() => setScreen("login")} onShutDown={() => setScreen("shutdown")} />
         </WindowManagerProvider>
       )}
-      {screen === "shutdown" && <ShutdownScreen onRestart={() => setScreen("login")} />}
+      {screen === "shutdown" && <ShutdownScreen onRestart={() => setScreen("boot")} />}
     </div>
   );
 }
