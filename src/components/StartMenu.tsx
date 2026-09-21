@@ -18,10 +18,12 @@ export function StartMenu({
   onClose,
   onLogOff,
   onShutDown,
+  onRun,
 }: {
   onClose: () => void;
   onLogOff: () => void;
   onShutDown: () => void;
+  onRun: () => void;
 }) {
   const { openApp } = useWindowManager();
   const ref = useRef<HTMLDivElement>(null);
@@ -95,29 +97,41 @@ export function StartMenu({
       </div>
 
       <div
-        className="flex items-center justify-end gap-2 px-2 py-1.5"
+        className="flex items-center justify-between gap-2 px-2 py-1.5"
         style={{ background: "linear-gradient(180deg, var(--xp-titlebar-start), var(--xp-titlebar-end))" }}
       >
         <button
           onClick={() => {
             sound.click();
-            onLogOff();
+            onRun();
             onClose();
           }}
           className="rounded px-2 py-1 text-[12px] text-white hover:bg-white/20"
         >
-          Log Off
+          Run&hellip;
         </button>
-        <button
-          onClick={() => {
-            sound.click();
-            onShutDown();
-            onClose();
-          }}
-          className="rounded px-2 py-1 text-[12px] text-white hover:bg-white/20"
-        >
-          Shut Down
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => {
+              sound.click();
+              onLogOff();
+              onClose();
+            }}
+            className="rounded px-2 py-1 text-[12px] text-white hover:bg-white/20"
+          >
+            Log Off
+          </button>
+          <button
+            onClick={() => {
+              sound.click();
+              onShutDown();
+              onClose();
+            }}
+            className="rounded px-2 py-1 text-[12px] text-white hover:bg-white/20"
+          >
+            Shut Down
+          </button>
+        </div>
       </div>
     </div>
   );

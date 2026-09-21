@@ -6,6 +6,7 @@ import type { AppId } from "@/lib/windowManager";
 import { StartOrb } from "@/components/icons";
 import { StartMenu } from "@/components/StartMenu";
 import { SystemTray } from "@/components/SystemTray";
+import { RunDialog } from "@/components/RunDialog";
 import { sound } from "@/lib/sound";
 
 function useClock() {
@@ -47,6 +48,7 @@ function ShowDesktopIcon() {
 export function Taskbar({ onLogOff, onShutDown }: { onLogOff: () => void; onShutDown: () => void }) {
   const { windows, focusApp, minimizeApp, restoreApp, activeAppId } = useWindowManager();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [runOpen, setRunOpen] = useState(false);
   const [hiddenByShowDesktop, setHiddenByShowDesktop] = useState<AppId[]>([]);
   const now = useClock();
 
@@ -66,8 +68,14 @@ export function Taskbar({ onLogOff, onShutDown }: { onLogOff: () => void; onShut
   return (
     <>
       {menuOpen && (
-        <StartMenu onClose={() => setMenuOpen(false)} onLogOff={onLogOff} onShutDown={onShutDown} />
+        <StartMenu
+          onClose={() => setMenuOpen(false)}
+          onLogOff={onLogOff}
+          onShutDown={onShutDown}
+          onRun={() => setRunOpen(true)}
+        />
       )}
+      {runOpen && <RunDialog onClose={() => setRunOpen(false)} />}
       <div
         className="absolute inset-x-0 bottom-0 z-[9998] flex h-11 items-center gap-1.5 border-t border-[#0a3d91] px-1"
         style={{ background: "linear-gradient(180deg, var(--xp-taskbar-start), var(--xp-taskbar-end))" }}

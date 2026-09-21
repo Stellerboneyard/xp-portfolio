@@ -1,6 +1,7 @@
 import type { ComponentType } from "react";
 import {
   AboutIcon,
+  CalculatorIcon,
   CommandPromptIcon,
   ComputerIcon,
   ContactIcon,
@@ -14,6 +15,7 @@ import {
   SolitaireIcon,
 } from "@/components/icons";
 import { AboutMeApp } from "./AboutMe";
+import { CalculatorApp } from "./Calculator";
 import { CommandPromptApp } from "./CommandPrompt";
 import { ContactApp } from "./Contact";
 import { DisplayPropertiesApp } from "./DisplayProperties";
@@ -38,7 +40,8 @@ export type AppId =
   | "my-computer"
   | "recycle-bin"
   | "command-prompt"
-  | "display-properties";
+  | "display-properties"
+  | "calculator";
 
 export type AppDef = {
   id: AppId;
@@ -190,6 +193,17 @@ export const APPS: Record<AppId, AppDef> = {
     minWidth: 360,
     minHeight: 280,
   },
+  calculator: {
+    id: "calculator",
+    title: "Calculator",
+    subtitle: "Does real math",
+    icon: CalculatorIcon,
+    content: CalculatorApp,
+    width: 240,
+    height: 320,
+    minWidth: 220,
+    minHeight: 300,
+  },
 };
 
 export const DESKTOP_ORDER: AppId[] = [
@@ -202,6 +216,7 @@ export const DESKTOP_ORDER: AppId[] = [
   "solitaire",
   "paint",
   "command-prompt",
+  "calculator",
   "recycle-bin",
 ];
 export const START_MENU_ORDER: AppId[] = [
@@ -215,4 +230,5 @@ export const START_MENU_ORDER: AppId[] = [
   "notepad",
   "paint",
   "command-prompt",
+  "calculator",
 ];

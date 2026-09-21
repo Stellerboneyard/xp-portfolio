@@ -239,6 +239,22 @@ export function DisplayIcon({ size = 40, className }: IconProps) {
   );
 }
 
+export function CalculatorIcon({ size = 40, className }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 40 40" className={className}>
+      <rect x="8" y="3" width="24" height="34" rx="2.5" fill="#e8e8e8" stroke="#8a8a8a" strokeWidth="1.2" />
+      <rect x="11" y="6" width="18" height="7" rx="1" fill="#9fd6a8" />
+      <g fill="#5c7291">
+        {[0, 1, 2, 3].map((col) =>
+          [0, 1, 2].map((row) => (
+            <rect key={`${col}-${row}`} x={11 + col * 4.7} y={17 + row * 6} width="3.3" height="4.2" rx="0.6" />
+          )),
+        )}
+      </g>
+    </svg>
+  );
+}
+
 export function StartOrb({ size = 22, className }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" className={className}>
